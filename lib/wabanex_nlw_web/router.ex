@@ -4,11 +4,18 @@ defmodule WabanexNlwWeb.Router do
   pipeline :api do
     plug :accepts, ["json"]
   end
-
+  # main route
   scope "/api", WabanexNlwWeb do
     pipe_through :api
 
     get "/", IMCController, :index
+  end
+  # graphql
+  scope "/api" do
+    pipe_through :api
+
+    forward "/graphql", Absinthe.Plug, schema: WabanexNlwWeb.Schema
+    forward "/graphiql", Absinthe.Plug.GraphiQL, schema: WabanexNlwWeb.Schema
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
