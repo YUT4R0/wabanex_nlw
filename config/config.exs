@@ -11,6 +11,11 @@ config :wabanex_nlw,
   ecto_repos: [WabanexNlw.Repo],
   generators: [timestamp_type: :utc_datetime]
 
+# for UUID generation
+config :wabanex_nlw, WabanexNlw.Repo,
+  migration_primary_key: [type: :binary_id],
+  migration_foreign_key: [type: :binary_id]
+
 # Configures the endpoint
 config :wabanex_nlw, WabanexNlwWeb.Endpoint,
   url: [host: "localhost"],
