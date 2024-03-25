@@ -1,6 +1,5 @@
 defmodule WabanexNlwWeb.Schema.Types.User do
   use Absinthe.Schema.Notation
-  import_types WabanexNlwWeb.Schema.Types.Custom.UUID4
 
   @desc "User schema (logic representing a user)"
   object :user do
