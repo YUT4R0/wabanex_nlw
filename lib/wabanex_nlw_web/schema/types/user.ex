@@ -6,6 +6,7 @@ defmodule WabanexNlwWeb.Schema.Types.User do
     field :id, non_null(:uuid4)
     field :name, non_null(:string)
     field :email, non_null(:string)
+    field :trainings, list_of(:training)
   end
 
   @desc "User mutation (logic representing a user creation)"

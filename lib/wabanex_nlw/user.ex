@@ -13,7 +13,7 @@ defmodule WabanexNlw.User do
     field :email, :string
     field :password, :string
 
-    has_one :training, Training
+    has_many :trainings, Training
 
     timestamps()
   end

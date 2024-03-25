@@ -8,7 +8,7 @@ defmodule WabanexNlwWeb.Schema.Types.Training do
     field :id, non_null(:uuid4)
     field :start_date, non_null(:string)
     field :end_date, non_null(:string)
-    field :exercises, non_null(:exercise)
+    field :exercises, list_of(:exercise)
   end
 
   @desc "Training mutation (logic representing a Training creation)"

@@ -1,5 +1,7 @@
 defmodule WabanexNlw.Users.Get do
-  alias WabanexNlw.{User, Repo}
+  import Ecto.Query
+
+  alias WabanexNlw.{User, Repo, Training}
   alias Ecto.UUID
 
   def call(id) do
@@ -13,7 +15,16 @@ defmodule WabanexNlw.Users.Get do
   defp handle_res({:ok, uuid}) do
     case Repo.get(User, uuid) do
       nil -> {:error, "User not found"}
-      user -> {:ok, user}
+      user -> {:ok, load_training(user)}
     end
+  end
+
+  defp load_training(user) do
+    today = Date.utc_today()
+    query =
+      from t in Training,
+        where: ^today >= t.start_date and ^today <= t.end_date
+
+    Repo.preload(user, trainings: {first(query, :inserted_at), :exercises})
   end
 end
